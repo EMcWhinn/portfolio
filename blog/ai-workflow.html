@@ -214,7 +214,7 @@
 <p>This was my starting point. I'd paste in code snippets I didn't understand, brainstorm approaches to problems, and generate quick scripts. It got me thinking differently about what I could automate rather than doing manually.</p>
 
 <h3>NotebookLM</h3>
-<p>You upload your own sources &mdash; docs, PDFs, meeting notes, design documents &mdash; and it creates a knowledge base you can query. This was a game-changer during the documentation cycle leading up to our 2.6 platform launch. I'd upload engineering design docs and existing published documentation, then ask it to synthesize information across those sources. It generates answers grounded in your actual materials, not generic internet knowledge. I use it almost daily now for research, content planning, and learning new features.</p>
+<p>You upload your own sources (docs, PDFs, meeting notes, design documents) and it creates a knowledge base you can query. This was a game-changer during the documentation cycle leading up to our 2.6 platform launch. I'd upload engineering design docs and existing published documentation, then ask it to synthesize information across those sources. It generates answers grounded in your actual materials, not generic internet knowledge. I use it almost daily now for research, content planning, and learning new features.</p>
 
 <h3>Claude Code</h3>
 <p>This is what I turn to when I need to build something. It runs in the terminal, maintains context across a session, adapts to exactly what you're trying to do, and can reference anything saved locally. It's become my first choice for any implementation work.</p>
@@ -224,17 +224,17 @@
 <p>A typical workflow looks something like:</p>
 
 <ol class="workflow-steps">
-    <li><strong>Research</strong> (NotebookLM) &mdash; Upload relevant engineering docs and existing content, map the problem space</li>
-    <li><strong>Brainstorming</strong> (Gemini) &mdash; Talk through approaches, weigh trade-offs</li>
-    <li><strong>Implementation</strong> (Claude Code) &mdash; Build the script, tool, or automation</li>
-    <li><strong>Refinement</strong> (all three) &mdash; Verify, check, debug when things inevitably break</li>
+    <li><strong>Research</strong> (NotebookLM): Upload relevant engineering docs and existing content, map the problem space</li>
+    <li><strong>Brainstorming</strong> (Gemini): Talk through approaches, weigh trade-offs</li>
+    <li><strong>Implementation</strong> (Claude Code): Build the script, tool, or automation</li>
+    <li><strong>Refinement</strong> (all three): Verify, check, debug when things inevitably break</li>
 </ol>
 
 <p>In practice I skip steps, go back and forth, or sometimes use Claude Code for everything. But having options means I can match the tool to the problem.</p>
 
 <h2>A force multiplier, not magic</h2>
 
-<p>AI doesn't write our documentation. That still requires understanding our users, clarifying complex concepts, and creating accurate technical content &mdash; all the things that actually matter.</p>
+<p>AI doesn't write our documentation. That still requires understanding our users, clarifying complex concepts, and creating accurate technical content. All the things that actually matter.</p>
 
 <p>But if I'm spending 30 minutes writing a bash script, that's 30 minutes I'm not improving our docs. AI has become my programming partner, editorial assistant, and brainstorming tool. You still have to think. But once you've figured out the right approach, AI helps you build it faster.</p>
 
@@ -244,7 +244,7 @@
 
 <p>When I run <a href="https://vale.sh/" style="color: #0d9488;">Vale</a> (our style guide linter), it only checks the master file. To verify style compliance across all included files, I'd have to manually lint every single one. With hundreds of files across multiple doc sets, this wasn't sustainable.</p>
 
-<p>I started by asking Gemini to sketch out a bash script that recursively parses AsciiDoc include directives and runs Vale on each file. I got a decent starting point &mdash; basic logic for parsing includes, rough structure. But when I tested it against a real doc set, it broke on attribute-based includes, missing files, and nested paths.</p>
+<p>I started by asking Gemini to sketch out a bash script that recursively parses AsciiDoc include directives and runs Vale on each file. I got a decent starting point: basic logic for parsing includes, rough structure. But when I tested it against a real doc set, it broke on attribute-based includes, missing files, and nested paths.</p>
 
 <p>I took that rough draft to Claude Code and iterated. A few prompts later, it refined the script with better pattern matching, proper recursive function handling, error handling for missing files, and filtering to exclude attribute-based includes. Claude Code accelerated what would have been hours of iteration into a focused working session.</p>
 
@@ -252,22 +252,43 @@
 
 <p>Instead of documenting this in a document that would immediately get lost, I created a <a href="https://github.com/EMcWhinn" style="color: #0d9488;">GitHub repository</a> with a proper README. Version control for the script itself, clear documentation that lives with the code, and easy sharing through a repo link that other writers can fork and adapt.</p>
 
-<p>The whole process &mdash; brainstorming, refining, setting up the repo &mdash; took about an hour. Now I run one command and Vale checks every file in the documentation tree. The script runs in our pre-commit workflow, catching style issues before they reach review.</p>
+<p>The whole process (brainstorming, refining, setting up the repo) took about an hour. Now I run one command and Vale checks every file in the documentation tree. The script runs in our pre-commit workflow, catching style issues before they reach review.</p>
 
 <h2>Example: backport verification</h2>
 
-<p>We support multiple documentation versions simultaneously &mdash; 2.6, 2.5, 2.4. When we merge a fix to main, we backport it to older branches. The manual process was: tag PRs with version labels, create backport PRs, add completion labels, check a weekly build checklist. With dozens of PRs weekly, there was no automated verification that backports were actually completed.</p>
+<p>We support multiple documentation versions simultaneously: 2.6, 2.5, 2.4. When we merge a fix to main, we backport it to older branches. The manual process was: tag PRs with version labels, create backport PRs, add completion labels, check a weekly build checklist. With dozens of PRs weekly, there was no automated verification that backports were actually completed.</p>
 
-<p>I started by identifying the failure points: too much reliance on human memory, no systematic verification. I brainstormed the approach with Gemini &mdash; GitHub Actions vs. standalone script, Slack vs. Jira notifications, weighing the tradeoffs. Then I built it with Claude Code: a Python script that queries the GitHub API, checks version labels against actual backport PRs, and detects mismatches.</p>
+<p>I started by identifying the failure points: too much reliance on human memory, no systematic verification. I brainstormed the approach with Gemini: GitHub Actions vs. standalone script, Slack vs. Jira notifications, weighing the tradeoffs. Then I built it with Claude Code: a Python script that queries the GitHub API, checks version labels against actual backport PRs, and detects mismatches.</p>
 
-<p>In the first month, it caught several PRs with version labels but no corresponding backports &mdash; fixes and improvements that customers on older versions would have missed. Every time it catches one, it validates the investment. It's one less manual process the team has to worry about.</p>
+<p>In the first month, it caught several PRs with version labels but no corresponding backports. Fixes and improvements that customers on older versions would have missed. Every time it catches one, it validates the investment. It's one less manual process the team has to worry about.</p>
+
+<h2>Example: sprint impact analysis</h2>
+
+<p>The most recent tool I built solves a different kind of problem. Every sprint, I need to review engineering tickets in Jira to determine which ones require documentation updates. With dozens of tickets per sprint across multiple components, this manual review was taking 45-60 minutes: reading each ticket summary, checking labels, assessing whether a change is user-facing or internal-only.</p>
+
+<p>I built <a href="https://github.com/EMcWhinn/sprint-analyzer" style="color: #0d9488;">sprint-analyzer</a>, a Python tool that integrates Claude Code with Jira through an Atlassian MCP server. Instead of reading tickets one by one, I ask Claude Code a natural language question like "Analyze Platform Services sprints for documentation impact" and get a categorized report in about 15 seconds.</p>
+
+<p>The tool does several things automatically:</p>
+
+<ul>
+    <li>Queries Jira for sprint and backlog tickets via natural language</li>
+    <li>Filters out internal work: test tickets, spikes, CI/CD, dev environment changes</li>
+    <li>Categorizes what's left by documentation impact: HIGH (breaking changes, deprecations, API removals), MEDIUM (new features, CVEs, behavior changes), and LOW (minor enhancements)</li>
+    <li>Generates a report with direct Jira links so I can act on the results immediately</li>
+</ul>
+
+<p>The categorization uses keyword pattern matching against ticket summaries, descriptions, labels, and issue types. It's not perfect (pattern matching never is), but it reliably surfaces the tickets that matter and filters the noise. I still review the output, but I'm reviewing a prioritized shortlist instead of the entire sprint board.</p>
+
+<p>This one is also designed to be reusable. The repo includes a <code>CLAUDE.md.template</code> that other writers can customize for their own Jira projects and team structures. Change the project key, team filter, and component names, and it works for a different product.</p>
+
+<p>What made this tool different from the earlier ones: it's the first where I combined Claude Code, an MCP server, and a standalone Python script into a single workflow. Each piece does what it's good at: Claude Code handles the natural language interface and orchestration, the MCP server handles Jira authentication and API calls, and the Python script handles the categorization logic.</p>
 
 <h2>What I've learned about making this work</h2>
 
 <ul>
     <li><strong>Be specific or get poor results.</strong> Early on I'd ask vague questions like "write me a script to check files." Now I explain the problem, show input data examples, specify output format, and mention edge cases. The difference in output quality is significant.</li>
     <li><strong>Always review.</strong> AI-generated code works most of the time, but not always. I test with real data and read the code to understand what it's doing. Trust, but verify.</li>
-    <li><strong>Iterate, don't expect perfection.</strong> The best results come from conversation &mdash; start basic, test with real data, refine based on what breaks.</li>
+    <li><strong>Iterate, don't expect perfection.</strong> The best results come from conversation. Start basic, test with real data, refine based on what breaks.</li>
     <li><strong>We're still the experts.</strong> AI handles implementation details. We handle understanding user needs, defining the right problem, designing the solution, and testing against real scenarios.</li>
     <li><strong>Document your automations.</strong> What problem it solves, how to run it, what to do when it breaks, how to update it later. If it's not documented, it's not maintainable.</li>
 </ul>
@@ -281,6 +302,7 @@
             <li>Writing boilerplate scripts from scratch</li>
             <li>Debugging syntax errors</li>
             <li>Manually tracking backports across versions</li>
+            <li>Reviewing sprint boards ticket-by-ticket for doc impact</li>
             <li>Running repetitive checks across hundreds of files</li>
         </ul>
     </div>
@@ -295,7 +317,7 @@
     </div>
 </div>
 
-<p>It's been a significant learning curve, and there's plenty more to come. The tools keep evolving, and so does how I use them. The fundamental shift is that I now approach repetitive operational work as an automation problem first, and that mindset &mdash; independent of any specific AI tool &mdash; has made the biggest difference.</p>
+<p>It's been a significant learning curve, and there's plenty more to come. The tools keep evolving, and so does how I use them. The fundamental shift is that I now approach repetitive operational work as an automation problem first, and that mindset, independent of any specific AI tool, has made the biggest difference.</p>
 
 </article>
 

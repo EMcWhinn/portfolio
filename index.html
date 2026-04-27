@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edward Mc Whinney - Technical Writer Portfolio</title>
+    <title>Edward Mc Whinney - Senior Technical Writer</title>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -113,46 +113,47 @@
             const experiences = [
                 {
                     company: "Red Hat",
-                    role: "Technical Writer",
-                    period: "January 2023 - Present",
+                    role: "Senior Technical Writer",
+                    period: "April 2026 - Present",
                     location: "Remote, Ireland",
                     highlights: [
-                        "Lead content delivery for Red Hat Ansible Automation Platform releases",
-                        "Developed 21 Quick Start Guides, reducing user setup time by 20%",
-                        "Author automation tools (recursive-vale-script, backport-checker) on GitHub",
-                        "Collaborate with Engineering, Documentation, and UX teams globally"
+                        "Lead documentation in an AI SDLC-first environment for Ansible Automation Platform 2.7 and Automation Orchestrator",
+                        "Pilot Adobe Experience Manager (AEM) as next-generation documentation publishing platform",
+                        "Built sprint-analyzer: AI-powered Jira sprint analysis tool reducing review time by 98%"
+                    ]
+                },
+                {
+                    company: "Red Hat",
+                    role: "Technical Writer",
+                    period: "January 2023 - March 2026",
+                    location: "Remote, Ireland",
+                    highlights: [
+                        "Led content delivery for Ansible Automation Platform, including Edge Manager and Event-Driven Ansible",
+                        "Developed 21 Quick Start Guides with UX and Engineering, reducing user setup time by 20%",
+                        "Built open-source automation tools (recursive-vale-script, backport-checker) adopted team-wide",
+                        "Led RST to AsciiDoc migration while enforcing IBM style compliance"
                     ]
                 },
                 {
                     company: "Amazon",
-                    role: "Lead Content Developer",
-                    period: "July 2022 - December 2022",
+                    role: "Content Developer / Lead Content Developer",
+                    period: "March 2020 - December 2022",
                     location: "Cork, Ireland",
                     highlights: [
                         "Directed peer review processes, achieving 30% reduction in post-publication revisions",
-                        "Mentored 5 associates, contributing to career advancement",
-                        "Managed localization for seller-facing communications in 19 languages"
-                    ]
-                },
-                {
-                    company: "Amazon",
-                    role: "Content Developer",
-                    period: "March 2020 - June 2022",
-                    location: "Cork, Ireland",
-                    highlights: [
-                        "Developed SOPs for risk and fraud investigators",
-                        "Ensured compliance and efficiency in business-critical processes"
+                        "Mentored 5 associates, two advancing to higher roles within six months",
+                        "Managed localization for seller-facing communications across 19 languages"
                     ]
                 },
                 {
                     company: "University College Cork",
-                    role: "PhD Graduate Student",
-                    period: "January 2016 - April 2019",
-                    location: "County Cork, Ireland",
+                    role: "PhD Hispanic Studies",
+                    period: "2016 - 2020",
+                    location: "Cork, Ireland",
                     highlights: [
-                        "Research on literary translation from Spanish to English",
-                        "Created comprehensive database of 185 translated titles",
-                        "Speaker at multiple international symposiums"
+                        "Completed in 3 years 4 months (faster than 4-year average)",
+                        "Built comprehensive research database of 185 translated titles",
+                        "Speaker at international symposiums"
                     ]
                 }
             ];
@@ -202,16 +203,16 @@
                     link: "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/index"
                 },
                 {
-                    title: "Quick start guides",
-                    description: "Streamlined onboarding documentation designed to reduce setup time and accelerate user adoption by 20%.",
-                    icon: <FileTextIcon />,
-                    link: ""
+                    title: "Sprint analyzer",
+                    description: "Open-source Python tool that integrates Claude Code with Jira via MCP to analyze sprint tickets for documentation impact. Reduces 45-60 minute manual reviews to 15 seconds.",
+                    icon: <CodeIcon />,
+                    link: "https://github.com/EMcWhinn/sprint-analyzer"
                 },
                 {
-                    title: "Release notes",
-                    description: "Clear, concise documentation of product updates, new features, and bug fixes for technical audiences.",
-                    icon: <BellIcon />,
-                    link: ""
+                    title: "Automation tools",
+                    description: "Open-source documentation workflow tools: recursive-vale-script for style linting across modular doc sets, and backport-checker for versioning verification across releases.",
+                    icon: <ClipboardIcon />,
+                    link: "https://github.com/EMcWhinn"
                 }
             ];
 
@@ -223,15 +224,14 @@
                             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                                 <div className="flex-1">
                                     <h1 className="text-5xl md:text-6xl font-bold mb-4">
-                                        Translating complex ideas into clear documentation
+                                        Edward Mc Whinney
                                     </h1>
                                     <p className="text-xl md:text-2xl text-teal-50 mb-6">
-                                        Technical Writer | UX Writer
+                                        Senior Technical Writer
                                     </p>
                                     <p className="text-lg text-teal-100 leading-relaxed">
-                                        PhD graduate with proven expertise in technical writing and UX design at Red Hat,
-                                        specializing in delivering high-quality documentation for distributed systems,
-                                        automation platforms, and cloud-native technologies.
+                                        I document distributed systems and build tooling to automate documentation workflows.
+                                        Currently at Red Hat, working on Ansible Automation Platform and Automation Orchestrator.
                                     </p>
                                     <div className="flex gap-4 mt-8">
                                         <a href="#contact" className="bg-white text-teal-700 px-6 py-3 rounded-lg font-semibold hover:bg-teal-50 transition-colors">
@@ -257,21 +257,19 @@
                             <h2 className="text-4xl font-bold text-slate-800 mb-8 text-center">About me</h2>
                             <div className="max-w-4xl mx-auto">
                                 <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                                    I'm driven by the opportunity to bridge technical complexity with user-centric clarity,
-                                    allowing individuals to harness the full potential of innovative technologies through
-                                    well-crafted documentation.
+                                    I write documentation for distributed systems and cloud-native platforms. At Red Hat,
+                                    I lead content for the Ansible Automation Platform, covering orchestration, event-driven
+                                    architecture, edge computing, and containerized execution environments.
                                 </p>
                                 <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                                    My philosophy centers on creating intuitive, accessible documentation that not only explains
-                                    <em>what</em> users can do, but <em>why</em> it matters and <em>how</em> it fits into their workflow.
-                                    At Red Hat, I've demonstrated this by leading initiatives that reduce user friction,
-                                    like developing Quick Start Guides that cut setup time by 20% and collaborating with UX teams
-                                    to enhance onboarding experiences.
+                                    I also build tooling to automate documentation workflows. I've created open-source tools
+                                    for recursive style linting, backport verification across versioned releases, and
+                                    AI-powered sprint analysis for documentation impact. These tools are used in our team's
+                                    CI/CD pipelines and daily workflows.
                                 </p>
                                 <p className="text-lg text-slate-700 leading-relaxed">
-                                    I combine technical expertise with AI-assisted workflows, using tools like Python/Bash scripting
-                                    for automation and leveraging Gemini, NotebookLM, and Claude for content creation. This approach
-                                    ensures scalable, high-quality documentation that meets the demands of modern software development.
+                                    Before Red Hat, I led content development at Amazon, where I directed peer review processes
+                                    and managed localization across 19 languages. I hold a PhD from University College Cork.
                                 </p>
                             </div>
                         </div>
@@ -410,7 +408,7 @@
                                         </div>
                                         <div>
                                             <h3 className="text-2xl font-bold text-slate-800 mb-2">Building documentation automation with AI</h3>
-                                            <p className="text-slate-600 mb-3">How I use Gemini, NotebookLM, and Claude Code to automate documentation workflows — from recursive style linting to backport verification across versioned releases.</p>
+                                            <p className="text-slate-600 mb-3">How I use Gemini, NotebookLM, and Claude Code to automate documentation workflows: recursive style linting, backport verification, and sprint impact analysis via Jira and MCP integration.</p>
                                             <span className="text-teal-600 font-semibold">Read article →</span>
                                         </div>
                                     </div>
@@ -485,7 +483,7 @@
                     <footer className="gradient-bg text-white py-8 px-6">
                         <div className="max-w-6xl mx-auto text-center">
                             <p className="text-teal-100">
-                                © {new Date().getFullYear()} Edward Mc Whinney, PhD. All rights reserved.
+                                © {new Date().getFullYear()} Edward Mc Whinney. All rights reserved.
                             </p>
                             <p className="text-teal-200 mt-2 text-sm">
                                 Built with React & Tailwind CSS
