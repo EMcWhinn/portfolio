@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building documentation automation with AI - Edward Mc Whinney</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+            background: #f8fafc;
+            line-height: 1.7;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%);
+            padding: 2rem 1.5rem;
+        }
+
+        header nav {
+            max-width: 52rem;
+            margin: 0 auto;
+        }
+
+        header a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        header a:hover { color: #fff; }
+
+        .article-header {
+            max-width: 52rem;
+            margin: 0 auto;
+            padding: 3.5rem 1.5rem 2rem;
+        }
+
+        .article-header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.25;
+            color: #0f172a;
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .article-meta span { margin-right: 1.5rem; }
+
+        article {
+            max-width: 52rem;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        article p {
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+            color: #334155;
+        }
+
+        article h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f766e;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #ccfbf1;
+        }
+
+        article h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #115e59;
+            margin: 2rem 0 0.75rem;
+        }
+
+        article ul, article ol {
+            margin: 0.75rem 0 1.25rem 1.5rem;
+            font-size: 1.05rem;
+            color: #334155;
+        }
+
+        article li { margin-bottom: 0.4rem; }
+
+        article strong { color: #0f172a; }
+
+        article em { color: #475569; }
+
+        blockquote {
+            border-left: 3px solid #14b8a6;
+            padding: 0.75rem 1.25rem;
+            margin: 1.5rem 0;
+            background: #f0fdfa;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        blockquote p {
+            margin-bottom: 0;
+            color: #115e59;
+            font-style: italic;
+        }
+
+        code {
+            font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+            background: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+            color: #0f766e;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .two-col div h3 { margin-top: 0; }
+
+        @media (max-width: 640px) {
+            .two-col { grid-template-columns: 1fr; }
+            .article-header h1 { font-size: 1.75rem; }
+        }
+
+        .workflow-steps {
+            list-style: none;
+            margin-left: 0;
+            counter-reset: step;
+        }
+
+        .workflow-steps li {
+            counter-increment: step;
+            padding-left: 2.25rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+
+        .workflow-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0.1rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #0d9488;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            max-width: 52rem;
+            margin: 0 auto;
+        }
+
+        footer a { color: #0d9488; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="../index.html">&larr; Back to portfolio</a>
+    </nav>
+</header>
+
+<div class="article-header">
+    <h1>Building documentation automation with AI: a technical writer's toolkit</h1>
+    <div class="article-meta">
+        <span>Edward Mc Whinney</span>
+        <span>Senior Technical Writer</span>
+        <span>2025</span>
+    </div>
+</div>
+
+<article>
+
+<p>I've been integrating AI tools into my technical writing workflow for about a year now, and it has changed how I work. Not in some revolutionary way where AI is writing our docs, but in a quieter, incremental way where I'm no longer spending half my day on tasks that don't improve documentation quality. Bash scripts. Regex debugging. Tracking which PR got backported to which version. Running the same linter command dozens of times because our docs are modular and nothing checks them all at once.</p>
+
+<p>I kept thinking: there has to be a better way to do this.</p>
+
+<p>I'm a senior technical writer documenting the Ansible Automation Platform, a distributed automation system with multiple components, versioned releases, and modular AsciiDoc documentation. The work involves a lot of actual writing, but also a significant amount of repetitive operational tasks that eat into the time I could spend making docs better.</p>
+
+<p>I started experimenting with Gemini, then discovered NotebookLM for research, and now use Claude Code for building tooling. Using all three together covers most of what I need, though sometimes one tool is enough depending on the task. I'll walk you through how this works in practice.</p>
+
+<h2>The tools</h2>
+
+<h3>Gemini</h3>
+<p>This was my starting point. I'd paste in code snippets I didn't understand, brainstorm approaches to problems, and generate quick scripts. It got me thinking differently about what I could automate rather than doing manually.</p>
+
+<h3>NotebookLM</h3>
+<p>You upload your own sources &mdash; docs, PDFs, meeting notes, design documents &mdash; and it creates a knowledge base you can query. This was a game-changer during the documentation cycle leading up to our 2.6 platform launch. I'd upload engineering design docs and existing published documentation, then ask it to synthesize information across those sources. It generates answers grounded in your actual materials, not generic internet knowledge. I use it almost daily now for research, content planning, and learning new features.</p>
+
+<h3>Claude Code</h3>
+<p>This is what I turn to when I need to build something. It runs in the terminal, maintains context across a session, adapts to exactly what you're trying to do, and can reference anything saved locally. It's become my first choice for any implementation work.</p>
+
+<h2>Day-to-day workflow</h2>
+
+<p>A typical workflow looks something like:</p>
+
+<ol class="workflow-steps">
+    <li><strong>Research</strong> (NotebookLM) &mdash; Upload relevant engineering docs and existing content, map the problem space</li>
+    <li><strong>Brainstorming</strong> (Gemini) &mdash; Talk through approaches, weigh trade-offs</li>
+    <li><strong>Implementation</strong> (Claude Code) &mdash; Build the script, tool, or automation</li>
+    <li><strong>Refinement</strong> (all three) &mdash; Verify, check, debug when things inevitably break</li>
+</ol>
+
+<p>In practice I skip steps, go back and forth, or sometimes use Claude Code for everything. But having options means I can match the tool to the problem.</p>
+
+<h2>A force multiplier, not magic</h2>
+
+<p>AI doesn't write our documentation. That still requires understanding our users, clarifying complex concepts, and creating accurate technical content &mdash; all the things that actually matter.</p>
+
+<p>But if I'm spending 30 minutes writing a bash script, that's 30 minutes I'm not improving our docs. AI has become my programming partner, editorial assistant, and brainstorming tool. You still have to think. But once you've figured out the right approach, AI helps you build it faster.</p>
+
+<h2>Example: recursive Vale linting</h2>
+
+<p>Our documentation uses a modular AsciiDoc structure. There's a <code>master.adoc</code> file that includes dozens of assemblies, which include modules and snippets, sometimes three or four levels deep.</p>
+
+<p>When I run <a href="https://vale.sh/" style="color: #0d9488;">Vale</a> (our style guide linter), it only checks the master file. To verify style compliance across all included files, I'd have to manually lint every single one. With hundreds of files across multiple doc sets, this wasn't sustainable.</p>
+
+<p>I started by asking Gemini to sketch out a bash script that recursively parses AsciiDoc include directives and runs Vale on each file. I got a decent starting point &mdash; basic logic for parsing includes, rough structure. But when I tested it against a real doc set, it broke on attribute-based includes, missing files, and nested paths.</p>
+
+<p>I took that rough draft to Claude Code and iterated. A few prompts later, it refined the script with better pattern matching, proper recursive function handling, error handling for missing files, and filtering to exclude attribute-based includes. Claude Code accelerated what would have been hours of iteration into a focused working session.</p>
+
+<p>I tested it on a real documentation set and it surfaced hundreds of previously undetected Vale violations. When the initial output was overwhelming, I added the <code>--minAlertLevel=warning</code> flag to filter out suggestions and focus on warnings and errors.</p>
+
+<p>Instead of documenting this in a document that would immediately get lost, I created a <a href="https://github.com/EMcWhinn" style="color: #0d9488;">GitHub repository</a> with a proper README. Version control for the script itself, clear documentation that lives with the code, and easy sharing through a repo link that other writers can fork and adapt.</p>
+
+<p>The whole process &mdash; brainstorming, refining, setting up the repo &mdash; took about an hour. Now I run one command and Vale checks every file in the documentation tree. The script runs in our pre-commit workflow, catching style issues before they reach review.</p>
+
+<h2>Example: backport verification</h2>
+
+<p>We support multiple documentation versions simultaneously &mdash; 2.6, 2.5, 2.4. When we merge a fix to main, we backport it to older branches. The manual process was: tag PRs with version labels, create backport PRs, add completion labels, check a weekly build checklist. With dozens of PRs weekly, there was no automated verification that backports were actually completed.</p>
+
+<p>I started by identifying the failure points: too much reliance on human memory, no systematic verification. I brainstormed the approach with Gemini &mdash; GitHub Actions vs. standalone script, Slack vs. Jira notifications, weighing the tradeoffs. Then I built it with Claude Code: a Python script that queries the GitHub API, checks version labels against actual backport PRs, and detects mismatches.</p>
+
+<p>In the first month, it caught several PRs with version labels but no corresponding backports &mdash; fixes and improvements that customers on older versions would have missed. Every time it catches one, it validates the investment. It's one less manual process the team has to worry about.</p>
+
+<h2>What I've learned about making this work</h2>
+
+<ul>
+    <li><strong>Be specific or get poor results.</strong> Early on I'd ask vague questions like "write me a script to check files." Now I explain the problem, show input data examples, specify output format, and mention edge cases. The difference in output quality is significant.</li>
+    <li><strong>Always review.</strong> AI-generated code works most of the time, but not always. I test with real data and read the code to understand what it's doing. Trust, but verify.</li>
+    <li><strong>Iterate, don't expect perfection.</strong> The best results come from conversation &mdash; start basic, test with real data, refine based on what breaks.</li>
+    <li><strong>We're still the experts.</strong> AI handles implementation details. We handle understanding user needs, defining the right problem, designing the solution, and testing against real scenarios.</li>
+    <li><strong>Document your automations.</strong> What problem it solves, how to run it, what to do when it breaks, how to update it later. If it's not documented, it's not maintainable.</li>
+</ul>
+
+<h2>The result</h2>
+
+<div class="two-col">
+    <div>
+        <h3>I spend less time on</h3>
+        <ul>
+            <li>Writing boilerplate scripts from scratch</li>
+            <li>Debugging syntax errors</li>
+            <li>Manually tracking backports across versions</li>
+            <li>Running repetitive checks across hundreds of files</li>
+        </ul>
+    </div>
+    <div>
+        <h3>I spend more time on</h3>
+        <ul>
+            <li>Improving documentation structure and information architecture</li>
+            <li>Making complex technical concepts understandable</li>
+            <li>Collaborating with engineering on new releases</li>
+            <li>Writing content that helps users solve real problems</li>
+        </ul>
+    </div>
+</div>
+
+<p>It's been a significant learning curve, and there's plenty more to come. The tools keep evolving, and so does how I use them. The fundamental shift is that I now approach repetitive operational work as an automation problem first, and that mindset &mdash; independent of any specific AI tool &mdash; has made the biggest difference.</p>
+
+</article>
+
+<footer>
+    <p>
+        <a href="../index.html">Edward Mc Whinney</a> &middot; Senior Technical Writer &middot;
+        The views expressed here are my own.
+    </p>
+</footer>
+
+</body>
+</html>
